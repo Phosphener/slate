@@ -75,6 +75,14 @@ curl -H "Content-Type: application/json" -X POST \
 N/A
 ```
 
+> BASE64_COMPRESSED_STRING must contain:
+
+```json
+{
+    dataIndex: 1
+}
+```
+
 > On success, reply of:
 
 ```json
@@ -263,10 +271,13 @@ N/A
 
 ```json
 {
-    "total_sessions": 15000,
-    "page_reviews": 5379534,
-    "session_increasement": 4400,
-    "average_session_time": 119
+    "total_sessions": 23,
+    "total_fixations": 3000,
+    "average_fixation_duration": 6,
+    "average_time_to_first_fixation": 2,
+    "sessions_with_fixation": 119,
+    "total_clicks": 5534,
+    "sessions_with_clicks": 4400
 }
 ```
 
@@ -304,12 +315,12 @@ N/A
 
 ```json
 {
-    "fixation_time": [
-        { "time": 1, "fixations": 226 },
-        { "time": 2, "fixations": 431 },
-        { "time": 3, "fixations": 542 },
-        { "time": 4, "fixations": 074 },
-        { "time": 5, "fixations": 193 }
+    "session_time": [
+        { "time": 1, "sessions": 226 },
+        { "time": 2, "sessions": 431 },
+        { "time": 3, "sessions": 542 },
+        { "time": 4, "sessions": 074 },
+        { "time": 5, "sessions": 193 }
     ]
 }
 ```
