@@ -81,7 +81,7 @@ N/A
 
 ```json
 {
-    dataIndex: 1
+    "dataIndex": 1
 }
 ```
 
