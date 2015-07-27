@@ -48,7 +48,9 @@ N/A
 > Reply of JSON Structure:
 
 ```json
-{"session_key":"a5d0be16-e39e-4b06-bee4-29126915cca1"}
+{
+    "session_key": "a5d0be16-e39e-4b06-bee4-29126915cca1"
+}
 ```
 
 This endpoint obtains a session key.
@@ -64,8 +66,8 @@ This endpoint obtains a session key.
 curl -H "Content-Type: application/json" -X POST \
     -d '{
             "session_key": "abc",
-            "url":"www.example.com/test",
             "domain":"www.example.com",
+            "url":"www.example.com/test",
             "data": "BASE64_COMPRESSED_STRING"
         }'\
     http://api.pinkpineapple.me/data
@@ -97,8 +99,17 @@ This endpoint submits eye gaze data to the server.
 
 `POST http://api.pinkpineapple.me/data`
 
+### Body Parameters
+
+Parameter | Description
+--------- | -----------
+session_key | Session key as obtained in /key
+domain | Domain of site
+url | Url in site
+data | BASE64 Compressed String (Secret Structure) (I'm just lazy to write it down right now)
+
 <aside class="warning">
-An invalid data string will throw an error!
+An invalid `data` string will throw an error!
 </aside>
 
 ## GET /data
@@ -133,11 +144,16 @@ N/A
 ```
 
 This endpoint retrieves a specific eye gaze data object.
-
+Not for use. Only testing purposes.
 
 ### HTTP Request
 
 `GET http://api.pinkpineapple.me/data/:id?`
+
+### URL Parameters
+Parameter | Description
+--------- | -----------
+id | Document id of data in database
 
 # clicks
 
@@ -146,8 +162,8 @@ This endpoint retrieves a specific eye gaze data object.
 ```shell
 curl -H "Content-Type: application/json" -X POST \
     -d '{
+            "domain": "www.example.com",
             "url": "www.example.com/page",
-            "domain": "example.com",
             "session_key": "800a827b-679c-42be-85c0-b87a8744faed",
             "clicks": [
                 {
@@ -189,6 +205,14 @@ Note that clicks data is sent seperately from eye gaze date (in the /data route)
 
 `POST http://api.pinkpineapple.me/clicks`
 
+### Body Parameters
+Parameter | Description
+--------- | -----------
+domain | Domain of site
+url | Url of page in site
+session_key | Session key as obtained in /key
+clicks | Clicks data. Too lazy to describe whole structure right now.
+
 # site
 
 ## GET /site
@@ -207,7 +231,7 @@ N/A
 {
     "sites": [
         {
-            "site_id": 01cbc1421314750a0004d748b59dd7ce,
+            "site_id": "01cbc1421314750a0004d748b59dd7ce",
             "site_url": "www.website1.com",
             "sessions_today": 10000,
             "pages": [
@@ -225,7 +249,7 @@ N/A
             ]
         },
         {
-            "site_id": d8a3c1421314750a0004d248be9dd7se,
+            "site_id": "d8a3c1421314750a0004d248be9dd7se",
             "site_url": "www.website2.com",
             "sessions_today": 10000,
             "pages": [
@@ -256,7 +280,7 @@ user_id   | *OPTIONAL* ID of the user. No id defaults to current user.
 ## GET /stats
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/stats/1?start_date=12345&end_date=54321
+curl -X GET http://api.pinkpineapple.me/stats/www.example.com/www.example.com%2Fpage/Component%20One?start_date=12345&end_date=54321
 ```
 
 ```javascript
@@ -285,9 +309,9 @@ Of use in the "Dashboard" section.
 ### Url Parameters
 Parameter | Description
 --------- | -----------
-site_id   | *OPTIONAL* ID of a site. No id defaults to global stats for current user
-page_id   | *OPTIONAL* ID of a page in site.
-component_id | *OPTIONAL* ID of a component in page.
+site_id   | *OPTIONAL* Domain of a site. No id defaults to global stats for current user
+page_id   | *OPTIONAL* URL of a page in site.
+component_id | *OPTIONAL* Name of a component in page.
 
 ### Query Parameters
 Parameter | Default | Description
@@ -300,7 +324,7 @@ end_date  | Current Time | End date range
 ## GET /charts/session_time
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/charts/session_time/1?start_date=12345&end_date=54321
+curl -X GET http://api.pinkpineapple.me/charts/session_time/www.example.com/www.example.com%2Fpage/Component%20One?start_date=12345&end_date=54321
 ```
 
 ```javascript
@@ -329,9 +353,9 @@ Gets chart data for sessions versus time.
 ### Url Parameters
 Parameter | Description
 --------- | -----------
-site_id   | ID of a site.
-page_id   | *OPTIONAL* ID of a page in site.
-component_id | *OPTIONAL* ID of a component in page.
+site_id   | Domain of a site.
+page_id   | *OPTIONAL* Url of a page in site.
+component_id | *OPTIONAL* Name of a component in page.
 
 ### Query Parameters
 Parameter | Default | Description
@@ -342,7 +366,7 @@ end_date  | Current Time | End date range. Unix Time.
 ## GET /charts/fixation_time
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/charts/fixation_time/1?start_date=12345&end_date=54321
+curl -X GET http://api.pinkpineapple.me/charts/fixation_time/www.example.com/www.example.com%2Fpage/Component%20One?start_date=12345&end_date=54321
 ```
 
 ```javascript
@@ -371,9 +395,9 @@ Gets chart data for fixations versus time.
 ### Url Parameters
 Parameter | Description
 --------- | -----------
-site_id   | ID of a site.
-page_id   | *OPTIONAL* ID of a page in site.
-component_id | *OPTIONAL* ID of a component in page.
+site_id   | Domain of a site.
+page_id   | *OPTIONAL* Url of a page in site.
+component_id | *OPTIONAL* Name of a component in page.
 
 ### Query Parameters
 Parameter | Default | Description
