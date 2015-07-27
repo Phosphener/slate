@@ -207,20 +207,17 @@ N/A
 {
     "sites": [
         {
-            "site_id": 1,
+            "site_id": 01cbc1421314750a0004d748b59dd7ce,
             "site_url": "www.website1.com",
             "sessions_today": 10000,
             "pages": [
                 {
-                    "page_id": 43,
                     "page_url": "www.website1.com/page1",
                     "components": [
                         {
-                            "component_id": 342,
                             "component_label": "top_banner"
                         },
                         {
-                            "component_id": 342,
                             "component_label": "top_banner"
                         }
                     ]
@@ -228,12 +225,11 @@ N/A
             ]
         },
         {
-            "site_id": 2,
+            "site_id": d8a3c1421314750a0004d248be9dd7se,
             "site_url": "www.website2.com",
             "sessions_today": 10000,
             "pages": [
                 {
-                    "page_id": 21,
                     "page_url": "www.website1.com/page1",
                     "components": []
                 }
