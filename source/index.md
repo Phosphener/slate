@@ -275,6 +275,62 @@ Parameter | Description
 --------- | -----------
 user_id   | *OPTIONAL* ID of the user. No id defaults to current user.
 
+# fixation
+
+## GET /fixation
+
+```shell
+curl -X GET http://api.pinkpineapple.me/stats/www.example.com/www.example/com%2Fpage?start_date=0&end_date=123456789123456789
+```
+
+```javascript
+N/A
+```
+
+> Return JSON of structure
+
+```json
+{
+    "count":1499,
+    "rows": [
+        {
+            "start_time":1440034850000,
+            "end_time":1440034850100,
+            "domain":"www.example.com",
+            "url":"www.example.com/page",
+            "component":"Component One",
+            "session_key":"zcbmadgjlqetup02468"
+        },
+        {
+            "start_time":1440034850225,
+            "end_time":1440034850300,
+            "domain":"www.example.com",
+            "url":"www.example.com/page",
+            "component":"Component One",
+            "session_key":"zcbmadgjlqetup02468"
+        }
+    ]
+}
+```
+
+Use this to grab fixation information. Higher level parsing needed to obtain useful data.
+
+### HTTP Request
+`GET http://api.pinkpineapple.me/fixation/:site_id/:page_id?/:component_id?`
+
+### Url Parameters
+Parameter | Description
+--------- | -----------
+site_id   | Domain of a site. No id defaults to global stats for current user
+page_id   | *OPTIONAL* URL of a page in site.
+component_id | *OPTIONAL* Name of a component in page.
+
+### Query Parameters
+Parameter | Default | Description
+--------- | ------- | -----------
+start_date| Epoch Time | Start date range
+end_date  | Current Time | End date range
+
 # stats
 
 ## GET /stats
@@ -304,12 +360,12 @@ N/A
 Of use in the "Dashboard" section.
 
 ### HTTP Request
-`GET http://api.pinkpineapple.me/stats/:site_id?/:page_id?/:component_id?`
+`GET http://api.pinkpineapple.me/stats/:site_id/:page_id?/:component_id?`
 
 ### Url Parameters
 Parameter | Description
 --------- | -----------
-site_id   | *OPTIONAL* Domain of a site. No id defaults to global stats for current user
+site_id   | Domain of a site. No id defaults to global stats for current user
 page_id   | *OPTIONAL* URL of a page in site.
 component_id | *OPTIONAL* Name of a component in page.
 
