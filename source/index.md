@@ -203,7 +203,7 @@ Note that clicks data is sent seperately from eye gaze date (in the /data route)
 
 ### HTTP Request
 
-`POST http://api.pinkpineapple.me/clicks`
+`POST http://api.pinkpineapple.me/clicks/:website_id/:page_id?/:component_id?`
 
 ### Body Parameters
 Parameter | Description
@@ -212,6 +212,57 @@ domain | Domain of site
 url | Url of page in site
 session_key | Session key as obtained in /key
 clicks | Clicks data. Too lazy to describe whole structure right now.
+
+## GET /clicks
+
+```shell
+curl -X GET http://api.pinkpineapple.me/clicks/www.example.com/www.example/com%2Fpage?start_time=0&end_time=123456789123456789
+```
+
+```javascript
+N/A
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "count":2,
+    "rows":[
+        {
+            "x":1,
+            "y":2,
+            "click_timestamp":1,
+            "domain":"www.example.com",
+            "url":"www.example.com",
+            "session_key":"TEST_SESSION_KEY"
+        },
+        {
+            "x":1.5,
+            "y":2.5,
+            "click_timestamp":2,
+            "domain":"www.example.com",
+            "url":"www.example.com",
+            "session_key":"TEST_SESSION_KEY"
+        }
+    ]
+}
+```
+
+Gets clicks based on website/page/component
+
+### Url Parameters
+Parameter | Description
+--------- | -----------
+site_id   | Domain of a site. No id defaults to global stats for current user
+page_id   | *OPTIONAL* URL of a page in site.
+component_id | *OPTIONAL* Name of a component in page.
+
+### Query Parameters
+Parameter | Default | Description
+--------- | ------- | -----------
+start_time| Epoch Time | Start date range. Unix timestamp in milliseconds
+end_time  | Current Time | End date range. Unix timestamp in milliseconds
 
 # site
 
@@ -280,7 +331,7 @@ user_id   | *OPTIONAL* ID of the user. No id defaults to current user.
 ## GET /fixation
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/stats/www.example.com/www.example/com%2Fpage?start_date=0&end_date=123456789123456789
+curl -X GET http://api.pinkpineapple.me/stats/www.example.com/www.example/com%2Fpage?start_time=0&end_time=123456789123456789
 ```
 
 ```javascript
@@ -328,8 +379,8 @@ component_id | *OPTIONAL* Name of a component in page.
 ### Query Parameters
 Parameter | Default | Description
 --------- | ------- | -----------
-start_date| Epoch Time | Start date range
-end_date  | Current Time | End date range
+start_time| Epoch Time | Start date range. Unix timestamp in milliseconds
+end_time  | Current Time | End date range. Unix timestamp in milliseconds
 
 # stats
 
