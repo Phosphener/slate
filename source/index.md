@@ -423,15 +423,15 @@ component_id | *OPTIONAL* Name of a component in page.
 ### Query Parameters
 Parameter | Default | Description
 --------- | ------- | -----------
-start_date| Epoch Time | Start date range
-end_date  | Current Time | End date range
+start_time| Epoch Time | Start date range
+end_time  | Current Time | End date range
 
 # charts
 
 ## GET /charts/session_time
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/charts/session_time/www.example.com/www.example.com%2Fpage/Component%20One?start_date=12345&end_date=54321
+curl -X GET http://api.pinkpineapple.me/charts/session_time/www.example.com/www.example.com%2Fpage/Component%20One?start_time=12345&end_time=54321
 ```
 
 ```javascript
@@ -467,13 +467,13 @@ component_id | *OPTIONAL* Name of a component in page.
 ### Query Parameters
 Parameter | Default | Description
 --------- | ------- | -----------
-start_date| Epoch Time | Start date range. Unix Time.
-end_date  | Current Time | End date range. Unix Time.
+start_time| Epoch Time | Start date range. Unix Time.
+end_time  | Current Time | End date range. Unix Time.
 
 ## GET /charts/fixation_time
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/charts/fixation_time/www.example.com/www.example.com%2Fpage/Component%20One?start_date=12345&end_date=54321
+curl -X GET http://api.pinkpineapple.me/charts/fixation_time/www.example.com/www.example.com%2Fpage/Component%20One?start_time=12345&end_time=54321
 ```
 
 ```javascript
@@ -509,5 +509,39 @@ component_id | *OPTIONAL* Name of a component in page.
 ### Query Parameters
 Parameter | Default | Description
 --------- | ------- | -----------
-start_date| Epoch Time | Start date range. Unix Time.
-end_date  | Current Time | End date range. Unix Time.
+start_time| Epoch Time | Start date range. Unix Time.
+end_time  | Current Time | End date range. Unix Time.
+
+## GET /charts/average_time_to_fixation
+
+```shell
+curl -X GET http://api.pinkpineapple.me/charts/average_time_to_fixation/www.example.com/www.example.com%2Fpage/Component%20One?start_time=12345&end_time=54321
+```
+
+```javascript
+N/A
+```
+
+> Reply of JSON:
+
+```json
+N/A
+```
+
+Gets chart data for average time to fixations versus time.
+
+### HTTP Request
+`GET http://api.pinkpineapple.me/charts/average_time_to_fixation/:site_id/:page_id?/:component_id?`
+
+### Url Parameters
+Parameter | Description
+--------- | -----------
+site_id   | Domain of a site.
+page_id   | *OPTIONAL* Url of a page in site.
+component_id | *OPTIONAL* Name of a component in page.
+
+### Query Parameters
+Parameter | Default | Description
+--------- | ------- | -----------
+start_time| Epoch Time | Start date range. Unix Time.
+end_time  | Current Time | End date range. Unix Time.
