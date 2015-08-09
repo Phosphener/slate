@@ -21,6 +21,8 @@ Welcome to the xLabsAnalytics API! You can use our API to access xLabsAnalytics 
 
 Language bindings are available in Shell and Javascript. Code examples available in the dark area to the right.
 
+Time used is Unix timestamp in milliseconds.
+
 # Authentication
 
 ```shell
@@ -35,10 +37,29 @@ N/A. Certain routes may not require authentication.
 
 # key
 
-## GET /key
+## GET /key/participant
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/key 
+curl -X GET http://api.pinkpineapple.me/key/participant
+```
+
+> Reply of JSON Structure:
+
+```json
+{
+    "participant_key": "a5d0be16-e39e-4b06-bee4-29126915cca1"
+}
+```
+
+This endpoint obtains a participant key to identify the participant.
+
+### HTTP Request
+`GET http://api.pinkpineapple.me/key/participant`
+
+## GET /key/session
+
+```shell
+curl -X GET http://api.pinkpineapple.me/key/session
 ```
 
 ```javascript
@@ -56,7 +77,7 @@ N/A
 This endpoint obtains a session key.
 
 ### HTTP Request
-`GET http://api.pinkpineapple.me/key`
+`GET http://api.pinkpineapple.me/key/session`
 
 # data
 
@@ -153,7 +174,7 @@ Not for use. Only testing purposes.
 ### URL Parameters
 Parameter | Description
 --------- | -----------
-id | Document id of data in database
+id | *OPTIONAL* Document id of data in database. Testing purposes only.
 
 # clicks
 
@@ -269,7 +290,7 @@ end_time  | Current Time | End date range. Unix timestamp in milliseconds
 ## GET /site
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/site/
+curl -X GET http://api.pinkpineapple.me/site
 ```
 
 ```javascript
@@ -282,9 +303,7 @@ N/A
 {
     "sites": [
         {
-            "site_id": "01cbc1421314750a0004d748b59dd7ce",
             "site_url": "www.website1.com",
-            "sessions_today": 10000,
             "pages": [
                 {
                     "page_url": "www.website1.com/page1",
@@ -300,9 +319,7 @@ N/A
             ]
         },
         {
-            "site_id": "d8a3c1421314750a0004d248be9dd7se",
             "site_url": "www.website2.com",
-            "sessions_today": 10000,
             "pages": [
                 {
                     "page_url": "www.website1.com/page1",
@@ -318,13 +335,167 @@ N/A
 This route returns a JSON object detailing the sites along with their respective pages/components managed
 
 ### HTTP Request
-`GET http://api.pinkpineapple.me/site/:user_id?`
+`GET http://api.pinkpineapple.me/site/:website_id?`
 
 ### Url Parameters
-
 Parameter | Description
 --------- | -----------
-user_id   | *OPTIONAL* ID of the user. No id defaults to current user.
+website_id | *OPTIONAL* Domain of a website. Returns site structure for a single site. Else, returns all available sites.
+
+## POST /site
+
+```shell
+curl -H "Content-Type: application/json" -X POST \
+    -d '{
+        "site_url": "www.example.com",
+        "pages": [
+            {
+                "page_url": "www.example.com/page"
+                "components": [
+                    {
+                        "component_label": "Component One"
+                    }                
+                ]
+            }
+        ]
+    }' http://api.pinkpineapple.me/site
+```
+
+```javascript
+N/A
+```
+
+> JSON Site object for created website is returned
+
+```json
+{
+    "site_url": "www.example.com",
+    "pages": [
+        {
+            "page_url": "www.example.com/page",
+            "components": [
+                {
+                    "component_label": "Component One"
+                }
+            ]
+        }
+    ]
+}
+```
+
+This route add a website to database.
+
+### HTTP Request
+`POST http://api.pinkpinepple.me/site`
+
+### Body Parameters
+Parameter | Description
+--------- | -----------
+site_url | Website domain
+pages[] | Array containing pages in website domain
+pages[i].page_url | Url of page
+pages[i].components[] | Array containing components in page pages[i]
+pages[i].components[j].component_label | Name of component
+
+## PUT /site
+
+```shell
+curl -H "Content-Type: application/json" -X PUT \
+    -d '{
+        "pages": [
+            {
+                "page_url": "www.example.com/page2"
+                "components": [
+                    {
+                        "component_label": "Component Two"
+                    }                
+                ]
+            }
+        ]
+    }' http://api.pinkpineapple.me/site/www.example.com/?overwrite=false
+```
+
+```javascript
+N/A
+```
+
+> Above example adds the page www.example.com/page2 to the domain www.example.com. A component named Component Two is also added to the page. JSON Object containing data of entire site is returned.
+
+```json
+{
+    "site_url": "www.example.com",
+    "pages": [
+        {
+            "page_url": "www.example.com/page",
+            "components": [
+                {
+                    "component_label": "Component One"
+                }
+            ]
+        },
+        {
+            "page_url": "www.example.com/page2",
+            "components": [
+                {
+                    "component_label": "Component Two"
+                }
+            ]
+        }
+    ]
+}
+```
+
+This route updates a website. Careful with overwrite flag.
+
+### HTTP Request
+`PUT http://api.pinkpineapple.me/site/:website_id`
+
+### Url Parameters
+Parameter | Description
+--------- | -----------
+website_id | Domain of website to be updated.
+
+### Query Parameters
+Parameter | Default | Description
+--------- | ------- | -----------
+overwrite | false | If set to true, object sent in body will overwrite entire object in database. If set to false, merely appends to object in database.
+
+### Body Parameters
+Parameter | Description
+--------- | -----------
+site_url | *OPTIONAL* Website domain
+pages[] | *OPTIONAL* Array containing pages in website domain
+pages[i].page_url | *OPTIONAL* Url of page
+pages[i].components[] | *OPTIONAL* Array containing components in page pages[i]
+pages[i].components[j].component_label | *OPTIONAL* Name of component
+
+## DELETE /site
+
+```shell
+curl -X DELETE http://api.pinkpineapple.me/site/www.example.com
+```
+
+```javascript
+N/A
+```
+
+> JSON reply on success of:
+
+```json
+{
+    "done": true
+}
+```
+
+Deletes a site.
+
+### HTTP Request
+`GET http://api.pinkpineapple.me/site/:site_id`
+
+### URL Parameters
+Parameter | Description
+--------- | -----------
+site_id   | Domain of a site.
 
 # fixation
 
@@ -382,6 +553,50 @@ Parameter | Default | Description
 start_time| Epoch Time | Start date range. Unix timestamp in milliseconds
 end_time  | Current Time | End date range. Unix timestamp in milliseconds
 
+# participant
+
+## GET /participant
+
+```shell
+curl -X GET http://api.pinkpineapple.me/participant/www.example.com
+```
+
+```javascript
+N/A
+```
+
+> Returns JSON of structure:
+
+```json
+{
+    "participants": [
+        {
+            "participant_key": "abc123456789",
+            "sessions": [
+                {
+                    "session_key": "aabbcc"
+                },
+                {
+                    "session_key": "bbccdd"
+                }  
+            ]
+        }
+    ]
+}
+```
+
+Gets participants and their list of sessions
+
+### HTTP Request
+`GET http://api.pinkpineapple.me/participant/:site_id?/:page_id?/:component_id?`
+
+### Url Parameters
+Parameter | Description
+--------- | -----------
+site_id   | *OPTIONAL* Domain of a site. No site id returns all participants.
+page_id   | *OPTIONAL* URL of a page in site.
+component_id | *OPTIONAL* Name of a component in page.
+
 # stats
 
 ## GET /stats
@@ -416,15 +631,18 @@ Of use in the "Dashboard" section.
 ### Url Parameters
 Parameter | Description
 --------- | -----------
-site_id   | Domain of a site. No id defaults to global stats for current user
+site_id   | Domain of a site.
 page_id   | *OPTIONAL* URL of a page in site.
 component_id | *OPTIONAL* Name of a component in page.
 
 ### Query Parameters
 Parameter | Default | Description
 --------- | ------- | -----------
-start_time| Epoch Time | Start date range
-end_time  | Current Time | End date range
+start_time| Epoch Time | *OPTIONAL* Start date range
+end_time  | Current Time | *OPTIONAL* End date range
+session_key | null | *OPTIONAL* Session Key
+participant_key | null | *OPTIONAL* Participant Key
+period | Day | *OPTIONAL* Time period. Day, Week, Month, Year
 
 # charts
 
@@ -442,7 +660,7 @@ N/A
 
 ```json
 {
-    "session_time": [
+    "chart": [
         { "time": 1, "sessions": 226 },
         { "time": 2, "sessions": 431 },
         { "time": 3, "sessions": 542 },
@@ -467,8 +685,56 @@ component_id | *OPTIONAL* Name of a component in page.
 ### Query Parameters
 Parameter | Default | Description
 --------- | ------- | -----------
-start_time| Epoch Time | Start date range. Unix Time.
-end_time  | Current Time | End date range. Unix Time.
+start_time| Epoch Time | *OPTIONAL* Start date range
+end_time  | Current Time | *OPTIONAL* End date range
+session_key | null | *OPTIONAL* Session Key
+participant_key | null | *OPTIONAL* Participant Key
+period | Day | *OPTIONAL* Time period. Day, Week, Month, Year
+
+## GET /charts/clicks_time
+
+```shell
+curl -X GET http://api.pinkpineapple.me/charts/clicks_time/www.example.com
+```
+
+```javascript
+N/A
+```
+
+> Reply of JSON:
+
+```json
+{
+    "chart": [
+        { "time": 1, "clicks": 226 },
+        { "time": 2, "clicks": 431 },
+        { "time": 3, "clicks": 542 },
+        { "time": 4, "clicks": 074 },
+        { "time": 5, "clicks": 193 }
+    ]
+}
+```
+
+Gets chart data for clicks versus time.
+
+### HTTP Request
+`GET http://api.pinkpineaple.me/charts/fixation_time/:site_id/:page_id?/:component_id?`
+
+### Url Parameters
+Parameter | Description
+--------- | -----------
+site_id   | Domain of a site.
+page_id   | *OPTIONAL* Url of a page in site.
+component_id | *OPTIONAL* Name of a component in page.
+
+### Query Parameters
+Parameter | Default | Description
+--------- | ------- | -----------
+start_time| Epoch Time | *OPTIONAL* Start date range
+end_time  | Current Time | *OPTIONAL* End date range
+session_key | null | *OPTIONAL* Session Key
+participant_key | null | *OPTIONAL* Participant Key
+period | Day | *OPTIONAL* Time period. Day, Week, Month, Year
 
 ## GET /charts/fixation_time
 
@@ -484,7 +750,7 @@ N/A
 
 ```json
 {
-    "fixation_time": [
+    "chart": [
         { "time": 1, "fixations": 226 },
         { "time": 2, "fixations": 431 },
         { "time": 3, "fixations": 542 },
@@ -509,8 +775,11 @@ component_id | *OPTIONAL* Name of a component in page.
 ### Query Parameters
 Parameter | Default | Description
 --------- | ------- | -----------
-start_time| Epoch Time | Start date range. Unix Time.
-end_time  | Current Time | End date range. Unix Time.
+start_time| Epoch Time | *OPTIONAL* Start date range
+end_time  | Current Time | *OPTIONAL* End date range
+session_key | null | *OPTIONAL* Session Key
+participant_key | null | *OPTIONAL* Participant Key
+period | Day | *OPTIONAL* Time period. Day, Week, Month, Year
 
 ## GET /charts/average_time_to_fixation
 
@@ -525,7 +794,15 @@ N/A
 > Reply of JSON:
 
 ```json
-N/A
+{
+    "chart": [
+        { "time": 1, "average_time_to_fixation": 226 },
+        { "time": 2, "average_time_to_fixation": 431 },
+        { "time": 3, "average_time_to_fixation": 542 },
+        { "time": 4, "average_time_to_fixation": 074 },
+        { "time": 5, "average_time_to_fixation": 193 }
+    ]
+}
 ```
 
 Gets chart data for average time to fixations versus time.
@@ -543,5 +820,99 @@ component_id | *OPTIONAL* Name of a component in page.
 ### Query Parameters
 Parameter | Default | Description
 --------- | ------- | -----------
-start_time| Epoch Time | Start date range. Unix Time.
-end_time  | Current Time | End date range. Unix Time.
+start_time| Epoch Time | *OPTIONAL* Start date range
+end_time  | Current Time | *OPTIONAL* End date range
+session_key | null | *OPTIONAL* Session Key
+participant_key | null | *OPTIONAL* Participant Key
+period | Day | *OPTIONAL* Time period. Day, Week, Month, Year
+
+
+## GET /charts/average_fixation_duration_time
+
+```shell
+curl -X GET http://api.pinkpineapple.me/charts/average_fixation_duration_time/www.example.com
+```
+
+```javascript
+N/A
+```
+
+> Reply of JSON
+
+```json
+{
+    "chart": [
+        { "time": 1, "average_fixation_duration": 226 },
+        { "time": 2, "average_fixation_duration": 431 },
+        { "time": 3, "average_fixation_duration": 542 },
+        { "time": 4, "average_fixation_duration": 074 },
+        { "time": 5, "average_fixation_duration": 193 }
+    ]
+}
+
+```
+
+Gets chart data for average fixation duration versus time.
+
+### HTTP Request
+`GET http://api.pinkpineapple.me/charts/average_fixation_duration_time/:site_id/:page_id?/:component_id?`
+
+### Url Parameters
+Parameter | Description
+--------- | -----------
+site_id   | Domain of a site.
+page_id   | *OPTIONAL* Url of a page in site.
+component_id | *OPTIONAL* Name of a component in page.
+
+### Query Parameters
+Parameter | Default | Description
+--------- | ------- | -----------
+start_time| Epoch Time | *OPTIONAL* Start date range
+end_time  | Current Time | *OPTIONAL* End date range
+session_key | null | *OPTIONAL* Session Key
+participant_key | null | *OPTIONAL* Participant Key
+period | Day | *OPTIONAL* Time period. Day, Week, Month, Year
+
+## GET /charts/fixation_count
+
+```shell
+curl -X GET http://api.pinkpineapple.me/charts/fixation_count/www.example.com
+```
+
+```javascript
+N/A
+```
+
+> Reply of JSON
+
+```json
+{
+    "chart": [
+        { "count": 1, "fixations": 32 },
+        { "count": 3, "fixations": 76 },
+        { "count": 4, "fixations": 2 },
+        { "count": 7, "fixations": 8 },
+        { "count": 9, "fixations": 3 }
+    ]
+}
+```
+For ring chart? Gets chart data for fixation counts.
+
+### HTTP Request
+`GET http://api.pinkpineapple.me/charts/fixation_count/:site_id/:page_id?/:component_id?`
+
+### Url Parameters
+Parameter | Description
+--------- | -----------
+site_id   | Domain of a site.
+page_id   | *OPTIONAL* Url of a page in site.
+component_id | *OPTIONAL* Name of a component in page.
+
+### Query Parameters
+Parameter | Default | Description
+--------- | ------- | -----------
+start_time| Epoch Time | *OPTIONAL* Start date range
+end_time  | Current Time | *OPTIONAL* End date range
+session_key | null | *OPTIONAL* Session Key
+participant_key | null | *OPTIONAL* Participant Key
+period | Day | *OPTIONAL* Time period. Day, Week, Month, Year
