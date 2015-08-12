@@ -931,11 +931,11 @@ N/A
 ```json
 {
     "chart": [
-        { "time": 1, "fixations_end_with_clicks": 226 },
-        { "time": 2, "fixations_end_with_clicks": 626 },
-        { "time": 3, "fixations_end_with_clicks": 100 },
-        { "time": 4, "fixations_end_with_clicks": 694 },
-        { "time": 5, "fixations_end_with_clicks": 138 }
+        { "time": 1, "fixations_end_with_click": 226 },
+        { "time": 2, "fixations_end_with_click": 626 },
+        { "time": 3, "fixations_end_with_click": 100 },
+        { "time": 4, "fixations_end_with_click": 694 },
+        { "time": 5, "fixations_end_with_click": 138 }
     ]
 }
 
