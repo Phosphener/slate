@@ -916,3 +916,49 @@ end_time  | Current Time | *OPTIONAL* End date range
 session_key | null | *OPTIONAL* Session Key
 participant_key | null | *OPTIONAL* Participant Key
 period | Day | *OPTIONAL* Time period. Day, Week, Month, Year
+
+## GET /charts/fixations_end_with_click
+```shell
+curl -X GET http://api.pinkpineapple.me/charts/fixations_end_with_click/www.example.com
+```
+
+```javascript
+N/A
+```
+
+> Reply of JSON
+
+```json
+{
+    "chart": [
+        { "time": 1, "fixations_end_with_clicks": 226 },
+        { "time": 2, "fixations_end_with_clicks": 626 },
+        { "time": 3, "fixations_end_with_clicks": 100 },
+        { "time": 4, "fixations_end_with_clicks": 694 },
+        { "time": 5, "fixations_end_with_clicks": 138 }
+    ]
+}
+
+```
+
+Gets chart data for average fixation duration versus time.
+
+### HTTP Request
+`GET http://api.pinkpineapple.me/charts/fixations_end_with_click/:site_id/:page_id?/:component_id?`
+
+### Url Parameters
+Parameter | Description
+--------- | -----------
+site_id   | Domain of a site.
+page_id   | *OPTIONAL* Url of a page in site.
+component_id | *OPTIONAL* Name of a component in page.
+
+### Query Parameters
+Parameter | Default | Description
+--------- | ------- | -----------
+start_time| Epoch Time | *OPTIONAL* Start date range
+end_time  | Current Time | *OPTIONAL* End date range
+session_key | null | *OPTIONAL* Session Key
+participant_key | null | *OPTIONAL* Participant Key
+period | Day | *OPTIONAL* Time period. Day, Week, Month, Year
+
