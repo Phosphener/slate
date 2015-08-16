@@ -913,7 +913,6 @@ start_time| Epoch Time | *OPTIONAL* Start date range
 end_time  | Current Time | *OPTIONAL* End date range
 session_key | null | *OPTIONAL* Session Key
 participant_key | null | *OPTIONAL* Participant Key
-period | Day | *OPTIONAL* Time period. Day, Week, Month, Year
 
 ## GET /charts/fixations_end_with_click
 ```shell
