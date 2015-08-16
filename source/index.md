@@ -588,14 +588,12 @@ N/A
 Gets participants and their list of sessions
 
 ### HTTP Request
-`GET http://api.pinkpineapple.me/participant/:site_id?/:page_id?/:component_id?`
+`GET http://api.pinkpineapple.me/site_id`
 
 ### Url Parameters
 Parameter | Description
 --------- | -----------
-site_id   | *OPTIONAL* Domain of a site. No site id returns all participants.
-page_id   | *OPTIONAL* URL of a page in site.
-component_id | *OPTIONAL* Name of a component in page.
+site_id   | *OPTIONAL* Domain of a site.
 
 # stats
 
