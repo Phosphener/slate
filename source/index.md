@@ -640,7 +640,7 @@ start_time| Epoch Time | *OPTIONAL* Start date range
 end_time  | Current Time | *OPTIONAL* End date range
 session_key | null | *OPTIONAL* Session Key
 participant_key | null | *OPTIONAL* Participant Key
-period | Day | *OPTIONAL* Time period. Day, Week, Month, Year
+period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 
 # charts
 
@@ -687,7 +687,7 @@ start_time| Epoch Time | *OPTIONAL* Start date range
 end_time  | Current Time | *OPTIONAL* End date range
 session_key | null | *OPTIONAL* Session Key
 participant_key | null | *OPTIONAL* Participant Key
-period | Day | *OPTIONAL* Time period. Day, Week, Month, Year
+period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 
 ## GET /charts/clicks_time
 
@@ -732,7 +732,7 @@ start_time| Epoch Time | *OPTIONAL* Start date range
 end_time  | Current Time | *OPTIONAL* End date range
 session_key | null | *OPTIONAL* Session Key
 participant_key | null | *OPTIONAL* Participant Key
-period | Day | *OPTIONAL* Time period. Day, Week, Month, Year
+period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 
 ## GET /charts/fixation_time
 
@@ -777,7 +777,7 @@ start_time| Epoch Time | *OPTIONAL* Start date range
 end_time  | Current Time | *OPTIONAL* End date range
 session_key | null | *OPTIONAL* Session Key
 participant_key | null | *OPTIONAL* Participant Key
-period | Day | *OPTIONAL* Time period. Day, Week, Month, Year
+period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 
 ## GET /charts/average_time_to_fixation
 
@@ -822,7 +822,7 @@ start_time| Epoch Time | *OPTIONAL* Start date range
 end_time  | Current Time | *OPTIONAL* End date range
 session_key | null | *OPTIONAL* Session Key
 participant_key | null | *OPTIONAL* Participant Key
-period | Day | *OPTIONAL* Time period. Day, Week, Month, Year
+period | Day | *OPTIONAL* Time period. Haour, Day, Week, Month
 
 
 ## GET /charts/average_fixation_duration_time
@@ -869,7 +869,7 @@ start_time| Epoch Time | *OPTIONAL* Start date range
 end_time  | Current Time | *OPTIONAL* End date range
 session_key | null | *OPTIONAL* Session Key
 participant_key | null | *OPTIONAL* Participant Key
-period | Day | *OPTIONAL* Time period. Day, Week, Month, Year
+period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 
 ## GET /charts/fixation_count
 
@@ -957,5 +957,5 @@ start_time| Epoch Time | *OPTIONAL* Start date range
 end_time  | Current Time | *OPTIONAL* End date range
 session_key | null | *OPTIONAL* Session Key
 participant_key | null | *OPTIONAL* Participant Key
-period | Day | *OPTIONAL* Time period. Day, Week, Month, Year
+period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 
