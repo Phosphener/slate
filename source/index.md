@@ -79,6 +79,39 @@ This endpoint obtains a session key.
 ### HTTP Request
 `GET http://api.pinkpineapple.me/key/session`
 
+# script
+
+## GET /script
+
+```shell
+curl -X GET http://api.pinkpineapple.me/script/www.example.com
+```
+
+```javascript
+N/A
+```
+
+> Get JSON object of structure:
+
+```json
+{
+    "script": "<script type='text/javascript' src='js/xLabsAnalytics.js'>\
+        </script><script type='text/javascript'>xa.start('API_KEY');</script>"
+}
+```
+
+Get snippet for embedded xLabs Analytics script.
+
+
+### HTTP Request
+`GET http://api.pinkpineaple.me/script/:site_id`
+
+### Body Parameters
+
+Parameter | Description
+--------- | -----------
+site_id | Domain of a site
+
 # data
 
 ## POST /data
