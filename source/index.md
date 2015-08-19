@@ -596,6 +596,61 @@ Parameter | Description
 --------- | -----------
 site_id   | *OPTIONAL* Domain of a site.
 
+### Query Parameters
+Parameter | Description
+--------- | -----------
+start_time| Epoch Time | Start date range. Unix timestamp in milliseconds
+end_time  | Current Time | End date range. Unix timestamp in milliseconds
+
+## GET /participant/component_fixation
+
+```shell
+curl -X GET http://api.pinkpineapple.me/participant/component_fixation/www.example.com?participant_key=123456
+```
+
+```javascript
+N/A
+```
+
+> Returns JSON object of structure:
+
+```json
+{
+    "participants": [
+        {
+            "participant_key1":
+                {
+                    "page1": {
+                        "Component1": 20,
+                        "Component2": 30
+                    },
+                    "page2": {
+                        "Component3": 10,
+                        "Component4": 23
+                    }
+                }
+        }
+    ]
+}
+```
+
+Component fixation for a participant
+
+### HTTP Request
+`GET /participant/component_fixation/:site_id/:page_id?`
+
+### Url Parameters
+Parameter | Description
+--------- | -----------
+site_id | Domain of a site.
+page_id | *OPTIONAL* Page in a site.
+
+### Query Parameters
+Parameter | Default | Description
+--------- | ------- | -----------
+participant_id | null | Participant key
+
+
 ## GET /participant/punch_card
 
 ```shell
@@ -618,6 +673,8 @@ N/A
 }
 ```
 
+Daily punch cards. Like in GitHub graphs.
+
 ### HTTP Request
 `GET http://api.pinkpineapple.me/participant/punch_card/:site_id/:participant_id?`
 
@@ -630,7 +687,7 @@ participant_id | *OPTIONAL* Participant key.
 ### Query Parameters
 Parameter | Default | Description
 --------- | ------- | -----------
-start_time | 0 | Unix time. Start time.
+start_time | Epoch time | Unix time. Start time.
 end_time | Current Time | Unix time. End time.
 
 # stats
@@ -676,8 +733,6 @@ Parameter | Default | Description
 --------- | ------- | -----------
 start_time| Epoch Time | *OPTIONAL* Start date range
 end_time  | Current Time | *OPTIONAL* End date range
-session_key | null | *OPTIONAL* Session Key
-participant_key | null | *OPTIONAL* Participant Key
 period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 
 # charts
@@ -723,8 +778,6 @@ Parameter | Default | Description
 --------- | ------- | -----------
 start_time| Epoch Time | *OPTIONAL* Start date range
 end_time  | Current Time | *OPTIONAL* End date range
-session_key | null | *OPTIONAL* Session Key
-participant_key | null | *OPTIONAL* Participant Key
 period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 
 ## GET /charts/clicks_time
@@ -768,8 +821,6 @@ Parameter | Default | Description
 --------- | ------- | -----------
 start_time| Epoch Time | *OPTIONAL* Start date range
 end_time  | Current Time | *OPTIONAL* End date range
-session_key | null | *OPTIONAL* Session Key
-participant_key | null | *OPTIONAL* Participant Key
 period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 
 ## GET /charts/fixation_time
@@ -813,8 +864,6 @@ Parameter | Default | Description
 --------- | ------- | -----------
 start_time| Epoch Time | *OPTIONAL* Start date range
 end_time  | Current Time | *OPTIONAL* End date range
-session_key | null | *OPTIONAL* Session Key
-participant_key | null | *OPTIONAL* Participant Key
 period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 
 ## GET /charts/average_time_to_fixation
@@ -858,8 +907,6 @@ Parameter | Default | Description
 --------- | ------- | -----------
 start_time| Epoch Time | *OPTIONAL* Start date range
 end_time  | Current Time | *OPTIONAL* End date range
-session_key | null | *OPTIONAL* Session Key
-participant_key | null | *OPTIONAL* Participant Key
 period | Day | *OPTIONAL* Time period. Haour, Day, Week, Month
 
 
@@ -905,8 +952,6 @@ Parameter | Default | Description
 --------- | ------- | -----------
 start_time| Epoch Time | *OPTIONAL* Start date range
 end_time  | Current Time | *OPTIONAL* End date range
-session_key | null | *OPTIONAL* Session Key
-participant_key | null | *OPTIONAL* Participant Key
 period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 
 ## GET /charts/fixation_count
@@ -949,8 +994,6 @@ Parameter | Default | Description
 --------- | ------- | -----------
 start_time| Epoch Time | *OPTIONAL* Start date range
 end_time  | Current Time | *OPTIONAL* End date range
-session_key | null | *OPTIONAL* Session Key
-participant_key | null | *OPTIONAL* Participant Key
 
 ## GET /charts/fixations_end_with_click
 ```shell
@@ -993,7 +1036,5 @@ Parameter | Default | Description
 --------- | ------- | -----------
 start_time| Epoch Time | *OPTIONAL* Start date range
 end_time  | Current Time | *OPTIONAL* End date range
-session_key | null | *OPTIONAL* Session Key
-participant_key | null | *OPTIONAL* Participant Key
 period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 
