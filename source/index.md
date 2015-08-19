@@ -587,6 +587,7 @@ N/A
 
 Gets participants and their list of sessions
 
+
 ### HTTP Request
 `GET http://api.pinkpineapple.me/site_id`
 
@@ -594,6 +595,43 @@ Gets participants and their list of sessions
 Parameter | Description
 --------- | -----------
 site_id   | *OPTIONAL* Domain of a site.
+
+## GET /participant/punch_card
+
+```shell
+curl -X GET http://api.pinkpineapple.me/participant/punch_card/www.example.com
+```
+
+```javascript
+N/A
+```
+
+> Returns JSON of structure:
+
+```json
+{
+    "participants":
+        {
+            "Sunday": {"12am": 65, "3am": 34, "11pm": 19 },
+            "Saturday": {"12am": 65, "3am": 34, "11pm": 19 }
+        }
+}
+```
+
+### HTTP Request
+`GET http://api.pinkpineapple.me/participant/punch_card/:site_id/:participant_id?`
+
+### Url Parameters
+Parameter | Description
+--------- | -----------
+site_id | Domain of website
+participant_id | *OPTIONAL* Participant key.
+
+### Query Parameters
+Parameter | Default | Description
+--------- | ------- | -----------
+start_time | 0 | Unix time. Start time.
+end_time | Current Time | Unix time. End time.
 
 # stats
 
