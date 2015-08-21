@@ -649,22 +649,21 @@ N/A
 
 ```json
 {
-    "participants": [
-        {
-            "participant_key1":
-                {
-                    "page1": {
-                        "Component1": 20,
-                        "Component2": 30
-                    },
-                    "page2": {
-                        "Component3": 10,
-                        "Component4": 23
-                    }
-                }
-        }
-    ]
-}
+   "participants":
+       {
+           "participant_key1":
+               {
+                   "page1": {
+                       "Component1": 20,
+                       "Component2": 30
+                   },
+                   "page2": {
+                       "Component3": 10,
+                       "Component4": 23
+                   }
+               }
+       }
+} 
 ```
 
 Component fixation for a participant
@@ -709,17 +708,17 @@ N/A
 Daily punch cards. Like in GitHub graphs.
 
 ### HTTP Request
-`GET http://api.pinkpineapple.me/participant/punch_card/:site_id/:participant_id?`
+`GET http://api.pinkpineapple.me/participant/punch_card/:site_id`
 
 ### Url Parameters
 Parameter | Description
 --------- | -----------
 site_id | Domain of website
-participant_id | *OPTIONAL* Participant key.
 
 ### Query Parameters
 Parameter | Default | Description
 --------- | ------- | -----------
+participant_id | null | Participant key.
 start_time | Epoch time | Unix time. Start time.
 end_time | Current Time | Unix time. End time.
 
