@@ -41,6 +41,8 @@ Credentials are passed as username:password in all routes.
 Server is stateless, we DO NOT maintain session information.
 Hence, username:password must be passed at every route.
 
+Most routes require authentication. Certain public routes do not.
+
 <aside class="notice">
 You must replace <code>USERNAME</code> and <code>PASSWORD</code> with your respective credentials.
 </aside>
@@ -141,7 +143,8 @@ This endpoint obtains a session key.
 ## GET /script
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/script/www.example.com
+curl -X GET -u USERNAME:PASSWORD\ 
+    http://api.pinkpineapple.me/script/www.example.com
 ```
 
 ```javascript
@@ -226,7 +229,8 @@ An invalid `data` string will throw an error!
 ## GET /data
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/data/x3DeknkJpoe2maj93
+curl -X GET -u USERNAME:PASSWORD\ 
+    http://api.pinkpineapple.me/data/x3DeknkJpoe2maj93
 ```
 
 ```javascript
@@ -327,7 +331,8 @@ clicks | Clicks data. Too lazy to describe whole structure right now.
 ## GET /clicks
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/clicks/www.example.com/www.example/com%2Fpage?start_time=0&end_time=123456789123456789
+curl -X GET -u USERNAME:PASSWORD\ 
+    http://api.pinkpineapple.me/clicks/www.example.com/www.example/com%2Fpage?start_time=0&end_time=123456789123456789
 ```
 
 ```javascript
@@ -380,7 +385,8 @@ end_time  | Current Time | End date range. Unix timestamp in milliseconds
 ## GET /site
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/site
+curl -X GET -u USERNAME:PASSWORD\ 
+    http://api.pinkpineapple.me/site
 ```
 
 ```javascript
@@ -436,6 +442,7 @@ website_id | *OPTIONAL* Domain of a website. Returns site structure for a single
 
 ```shell
 curl -H "Content-Type: application/json" -X POST \
+    -u USERNAME:PASSWORD\ 
     -d '{
         "site_url": "www.example.com",
         "pages": [
@@ -491,6 +498,7 @@ pages[i].components[j].component_label | Name of component
 
 ```shell
 curl -H "Content-Type: application/json" -X PUT \
+    -u USERNAME:PASSWORD\ 
     -d '{
         "pages": [
             {
@@ -562,7 +570,8 @@ pages[i].components[j].component_label | *OPTIONAL* Name of component
 ## DELETE /site
 
 ```shell
-curl -X DELETE http://api.pinkpineapple.me/site/www.example.com
+curl -X DELETE -u USERNAME:PASSWORD\ 
+    http://api.pinkpineapple.me/site/www.example.com
 ```
 
 ```javascript
@@ -592,7 +601,8 @@ site_id   | Domain of a site.
 ## GET /fixation
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/stats/www.example.com/www.example/com%2Fpage?start_time=0&end_time=123456789123456789
+curl -X GET -u USERNAME:PASSWORD\ 
+    http://api.pinkpineapple.me/stats/www.example.com/www.example/com%2Fpage?start_time=0&end_time=123456789123456789
 ```
 
 ```javascript
@@ -648,7 +658,8 @@ end_time  | Current Time | End date range. Unix timestamp in milliseconds
 ## GET /participant
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/participant/www.example.com
+curl -X GET -u USERNAME:PASSWORD\ 
+    http://api.pinkpineapple.me/participant/www.example.com
 ```
 
 ```javascript
@@ -695,7 +706,8 @@ end_time  | Current Time | End date range. Unix timestamp in milliseconds
 ## GET /participant/component_fixation
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/participant/component_fixation/www.example.com?participant_key=123456
+curl -X GET -u USERNAME:PASSWORD\ 
+    http://api.pinkpineapple.me/participant/component_fixation/www.example.com?participant_key=123456
 ```
 
 ```javascript
@@ -743,7 +755,8 @@ participant_id | null | Participant key
 ## GET /participant/punch_card
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/participant/punch_card/www.example.com
+curl -X GET -u USERNAME:PASSWORD\ 
+    http://api.pinkpineapple.me/participant/punch_card/www.example.com
 ```
 
 ```javascript
@@ -784,7 +797,8 @@ end_time | Current Time | Unix time. End time.
 ## GET /stats
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/stats/www.example.com/www.example.com%2Fpage/Component%20One?start_date=12345&end_date=54321
+curl -X GET -u USERNAME:PASSWORD\ 
+    http://api.pinkpineapple.me/stats/www.example.com/www.example.com%2Fpage/Component%20One?start_date=12345&end_date=54321
 ```
 
 ```javascript
@@ -829,7 +843,8 @@ period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 ## GET /charts/session_time
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/charts/session_time/www.example.com/www.example.com%2Fpage/Component%20One?start_time=12345&end_time=54321
+curl -X GET -u USERNAME:PASSWORD\ 
+    http://api.pinkpineapple.me/charts/session_time/www.example.com/www.example.com%2Fpage/Component%20One?start_time=12345&end_time=54321
 ```
 
 ```javascript
@@ -872,7 +887,8 @@ period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 ## GET /charts/clicks_time
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/charts/clicks_time/www.example.com
+curl -X GET -u USERNAME:PASSWORD\ 
+    http://api.pinkpineapple.me/charts/clicks_time/www.example.com
 ```
 
 ```javascript
@@ -915,7 +931,8 @@ period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 ## GET /charts/fixation_time
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/charts/fixation_time/www.example.com/www.example.com%2Fpage/Component%20One?start_time=12345&end_time=54321
+curl -X GET -u USERNAME:PASSWORD\ 
+    http://api.pinkpineapple.me/charts/fixation_time/www.example.com/www.example.com%2Fpage/Component%20One?start_time=12345&end_time=54321
 ```
 
 ```javascript
@@ -958,7 +975,8 @@ period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 ## GET /charts/average_time_to_fixation
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/charts/average_time_to_fixation/www.example.com/www.example.com%2Fpage/Component%20One?start_time=12345&end_time=54321
+curl -X GET -u USERNAME:PASSWORD\ 
+    http://api.pinkpineapple.me/charts/average_time_to_fixation/www.example.com/www.example.com%2Fpage/Component%20One?start_time=12345&end_time=54321
 ```
 
 ```javascript
@@ -1002,7 +1020,8 @@ period | Day | *OPTIONAL* Time period. Haour, Day, Week, Month
 ## GET /charts/average_fixation_duration_time
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/charts/average_fixation_duration_time/www.example.com
+curl -X GET -u USERNAME:PASSWORD\ 
+    http://api.pinkpineapple.me/charts/average_fixation_duration_time/www.example.com
 ```
 
 ```javascript
@@ -1046,7 +1065,8 @@ period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 ## GET /charts/fixation_count
 
 ```shell
-curl -X GET http://api.pinkpineapple.me/charts/fixation_count/www.example.com
+curl -X GET -u USERNAME:PASSWORD\ 
+    http://api.pinkpineapple.me/charts/fixation_count/www.example.com
 ```
 
 ```javascript
@@ -1086,7 +1106,8 @@ end_time  | Current Time | *OPTIONAL* End date range
 
 ## GET /charts/fixations_end_with_click
 ```shell
-curl -X GET http://api.pinkpineapple.me/charts/fixations_end_with_click/www.example.com
+curl -X GET -u USERNAME:PASSWORD\ 
+    http://api.pinkpineapple.me/charts/fixations_end_with_click/www.example.com
 ```
 
 ```javascript
