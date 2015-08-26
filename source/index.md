@@ -25,15 +25,72 @@ Time used is Unix timestamp in milliseconds.
 
 # Authentication
 
+> Authorization is as such:
+
 ```shell
-N/A
+curl -u USERNAME:PASSWORD\ 
+    http://api.pinkpineapple.me/
 ```
 
 ```javascript
 N/A
 ```
 
-N/A. Certain routes may not require authentication.
+Basic HTTP Authentication is used in the Instamelb API. 
+Credentials are passed as username:password in all routes.
+Server is stateless, we DO NOT maintain session information.
+Hence, username:password must be passed at every route.
+
+<aside class="notice">
+You must replace <code>USERNAME</code> and <code>PASSWORD</code> with your respective credentials.
+</aside>
+
+# register
+
+## POST /register
+
+```shell
+curl -H "Content-Type: application/json" -X POST \
+    -d '{
+            "username": "NEW_USERNAME",
+            "email": "USER@NEW_EMAIL.COM",
+            "password": "NEW_PASSWORD"
+        }'\ 
+    http://api.pinkpineapple.me/register
+```
+
+```java
+N/A
+```
+> On successful registration, the above command returns JSON structured like this:
+
+```json
+{
+    "registered": true
+}
+```
+
+> In event of failed registration, we return:
+
+```json
+{
+    "registered": false,
+    "error": "Email already registered"
+}
+```
+
+This endpoint registers a new user in the system.
+
+### HTTP Request
+`POST http://api.pinkpineapple.me/register`
+
+### Body Parameters
+
+Parameter | Description
+--------- | -----------
+username | Username of account.
+email | Email to be registered.
+password | Password of account
 
 # key
 
