@@ -69,6 +69,8 @@ N/A
 
 > In event of failed logged in, we just return a 401 error
 
+This endpoints authenticates a user's username and password then return the user the result of login.
+
 ### HTTP Request
 `POST http://api.pinkpineapple.me/login`
 
@@ -726,11 +728,6 @@ Parameter | Description
 --------- | -----------
 site_id   | *OPTIONAL* Domain of a site.
 
-### Query Parameters
-Parameter | Description
---------- | -----------
-start_time| Epoch Time | Start date range. Unix timestamp in milliseconds
-end_time  | Current Time | End date range. Unix timestamp in milliseconds
 
 ## GET /participant/component_fixation
 
@@ -779,6 +776,8 @@ page_id | *OPTIONAL* Page in a site.
 Parameter | Default | Description
 --------- | ------- | -----------
 participant_id | null | Participant key
+start_time| Epoch Time | Start date range. Unix timestamp in milliseconds
+end_time  | Current Time | End date range. Unix timestamp in milliseconds
 
 
 ## GET /participant/punch_card
