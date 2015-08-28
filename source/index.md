@@ -47,6 +47,31 @@ Most routes require authentication. Certain public routes do not.
 You must replace <code>USERNAME</code> and <code>PASSWORD</code> with your respective credentials.
 </aside>
 
+## POST /login
+
+```shell
+curl -X POST \
+	 -u USERNAME:PASSWORD \
+	 http://api.pinkpineapple.me/login
+```
+
+```java
+N/A
+```
+
+> On successful logged in, the above command returns JSON structured like this:
+
+```json
+{
+	"credentials_valid": true
+}
+```
+
+> In event of failed logged in, we just return a 401 error
+
+### HTTP Request
+`POST http://api.pinkpineapple.me/login`
+
 # register
 
 ## POST /register
@@ -670,19 +695,23 @@ N/A
 
 ```json
 {
-    "participants": [
-        {
-            "participant_key": "abc123456789",
+    "participants": {
+        "participant_key1": {
             "sessions": [
-                {
-                    "session_key": "aabbcc"
-                },
-                {
-                    "session_key": "bbccdd"
-                }  
-            ]
+            	"session_key1",
+				"session_key2"
+            ],
+            "session_count": 2
+        },
+        "participant_key2": {
+            "sessions": [
+            	"session_key3",
+				"session_key4",
+				"session_key5"
+            ],
+            "session_count": 3
         }
-    ]
+    }
 }
 ```
 
