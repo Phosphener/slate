@@ -427,6 +427,8 @@ N/A
     "sites": [
         {
             "site_url": "www.website1.com",
+            "token": "asdsacdsac",
+            "extension_enabled": true,
             "category": [],
             "pages": [
                 {
@@ -444,7 +446,9 @@ N/A
         },
         {
             "site_url": "www.website2.com",
-            "category": ["Math"]
+            "token": "asdsacdsac",
+            "extension_enabled": true,
+            "category": ["Math"],
             "pages": [
                 {
                     "page_url": "www.website1.com/page1",
@@ -474,7 +478,7 @@ curl -H "Content-Type: application/json" -X POST \
     -u USERNAME:PASSWORD\ 
     -d '{
         "site_url": "www.example.com",
-        "category": ["sports", "news"]
+        "categories": ["sports", "news"]
     }' http://api.pinkpineapple.me/site
 ```
 
@@ -487,16 +491,10 @@ N/A
 ```json
 {
     "site_url": "www.example.com",
-    "pages": [
-        {
-            "page_url": "www.example.com/page",
-            "components": [
-                {
-                    "component_label": "Component One"
-                }
-            ]
-        }
-    ]
+    "categories": ["sports", "news"],
+    "token": "1235-2134-12lkdmlk-23e",
+    "extension_enabled": true,
+    "pages": []   
 }
 ```
 
@@ -510,79 +508,6 @@ Parameter | Description
 --------- | -----------
 site_url | Website domain
 category | Array of strings of categories for site.
-
-## PUT /site
-
-```shell
-curl -H "Content-Type: application/json" -X PUT \
-    -u USERNAME:PASSWORD\ 
-    -d '{
-        "pages": [
-            {
-                "page_url": "www.example.com/page2"
-                "components": [
-                    {
-                        "component_label": "Component Two"
-                    }                
-                ]
-            }
-        ]
-    }' http://api.pinkpineapple.me/site/www.example.com/?overwrite=false
-```
-
-```javascript
-N/A
-```
-
-> Above example adds the page www.example.com/page2 to the domain www.example.com. A component named Component Two is also added to the page. JSON Object containing data of entire site is returned.
-
-```json
-{
-    "site_url": "www.example.com",
-    "pages": [
-        {
-            "page_url": "www.example.com/page",
-            "components": [
-                {
-                    "component_label": "Component One"
-                }
-            ]
-        },
-        {
-            "page_url": "www.example.com/page2",
-            "components": [
-                {
-                    "component_label": "Component Two"
-                }
-            ]
-        }
-    ]
-}
-```
-
-This route updates a website. Careful with overwrite flag.
-
-### HTTP Request
-`PUT http://api.pinkpineapple.me/site/:website_id`
-
-### Url Parameters
-Parameter | Description
---------- | -----------
-website_id | Domain of website to be updated.
-
-### Query Parameters
-Parameter | Default | Description
---------- | ------- | -----------
-overwrite | false | If set to true, object sent in body will overwrite entire object in database. If set to false, merely appends to object in database.
-
-### Body Parameters
-Parameter | Description
---------- | -----------
-site_url | *OPTIONAL* Website domain
-pages[] | *OPTIONAL* Array containing pages in website domain
-pages[i].page_url | *OPTIONAL* Url of page
-pages[i].components[] | *OPTIONAL* Array containing components in page pages[i]
-pages[i].components[j].component_label | *OPTIONAL* Name of component
 
 ## DELETE /site
 
