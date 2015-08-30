@@ -47,6 +47,33 @@ Most routes require authentication. Certain public routes do not.
 You must replace <code>USERNAME</code> and <code>PASSWORD</code> with your respective credentials.
 </aside>
 
+## POST /login
+
+```shell
+curl -X POST \
+	 -u USERNAME:PASSWORD \
+	 http://api.pinkpineapple.me/login
+```
+
+```java
+N/A
+```
+
+> On successful logged in, the above command returns JSON structured like this:
+
+```json
+{
+	"credentials_valid": true
+}
+```
+
+> In event of failed logged in, we just return a 401 error
+
+This endpoints authenticates a user's username and password then return the user the result of login.
+
+### HTTP Request
+`POST http://api.pinkpineapple.me/login`
+
 # register
 
 ## POST /register
@@ -660,19 +687,23 @@ N/A
 
 ```json
 {
-    "participants": [
-        {
-            "participant_key": "abc123456789",
+    "participants": {
+        "participant_key1": {
             "sessions": [
-                {
-                    "session_key": "aabbcc"
-                },
-                {
-                    "session_key": "bbccdd"
-                }  
-            ]
+            	"session_key1",
+				"session_key2"
+            ],
+            "session_count": 2
+        },
+        "participant_key2": {
+            "sessions": [
+            	"session_key3",
+				"session_key4",
+				"session_key5"
+            ],
+            "session_count": 3
         }
-    ]
+    }
 }
 ```
 
@@ -687,11 +718,6 @@ Parameter | Description
 --------- | -----------
 site_id   | *OPTIONAL* Domain of a site.
 
-### Query Parameters
-Parameter | Description
---------- | -----------
-start_time| Epoch Time | Start date range. Unix timestamp in milliseconds
-end_time  | Current Time | End date range. Unix timestamp in milliseconds
 
 ## GET /participant/component_fixation
 
@@ -740,6 +766,8 @@ page_id | *OPTIONAL* Page in a site.
 Parameter | Default | Description
 --------- | ------- | -----------
 participant_id | null | Participant key
+start_time| Epoch Time | Start date range. Unix timestamp in milliseconds
+end_time  | Current Time | End date range. Unix timestamp in milliseconds
 
 
 ## GET /participant/punch_card
