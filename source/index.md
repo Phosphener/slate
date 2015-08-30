@@ -400,6 +400,7 @@ N/A
     "sites": [
         {
             "site_url": "www.website1.com",
+            "category": [],
             "pages": [
                 {
                     "page_url": "www.website1.com/page1",
@@ -416,6 +417,7 @@ N/A
         },
         {
             "site_url": "www.website2.com",
+            "category": ["Math"]
             "pages": [
                 {
                     "page_url": "www.website1.com/page1",
@@ -445,16 +447,7 @@ curl -H "Content-Type: application/json" -X POST \
     -u USERNAME:PASSWORD\ 
     -d '{
         "site_url": "www.example.com",
-        "pages": [
-            {
-                "page_url": "www.example.com/page"
-                "components": [
-                    {
-                        "component_label": "Component One"
-                    }                
-                ]
-            }
-        ]
+        "category": ["sports", "news"]
     }' http://api.pinkpineapple.me/site
 ```
 
@@ -489,10 +482,7 @@ This route add a website to database.
 Parameter | Description
 --------- | -----------
 site_url | Website domain
-pages[] | Array containing pages in website domain
-pages[i].page_url | Url of page
-pages[i].components[] | Array containing components in page pages[i]
-pages[i].components[j].component_label | Name of component
+category | Array of strings of categories for site.
 
 ## PUT /site
 
