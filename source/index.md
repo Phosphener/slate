@@ -429,7 +429,7 @@ N/A
             "site_url": "www.website1.com",
             "token": "asdsacdsac",
             "extension_enabled": true,
-            "category": [],
+            "categories": [],
             "pages": [
                 {
                     "page_url": "www.website1.com/page1",
@@ -448,7 +448,7 @@ N/A
             "site_url": "www.website2.com",
             "token": "asdsacdsac",
             "extension_enabled": true,
-            "category": ["Math"],
+            "categories": ["Math"],
             "pages": [
                 {
                     "page_url": "www.website1.com/page1",
@@ -507,7 +507,7 @@ This route add a website to database.
 Parameter | Description
 --------- | -----------
 site_url | Website domain
-category | Array of strings of categories for site.
+categories | Array of strings of categories for site.
 
 ## DELETE /site
 
