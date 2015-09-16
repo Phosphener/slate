@@ -1091,3 +1091,76 @@ start_time| Epoch Time | *OPTIONAL* Start date range
 end_time  | Current Time | *OPTIONAL* End date range
 period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 
+# component_pass
+
+## GET /component_pass
+```shell
+curl -X GET -u USERNAME:PASSWORD \
+    http://api.pinkpineapple.me/component_pass/www.example.com/www.example.com%2Fpage/CompOne
+```
+
+```javascript
+N/A
+```
+
+> Sucessful request of component pass returns JSON of:
+
+```json
+{
+    "component_id": null,
+    "jump_count": -1,
+    "total_jumps": 666,
+    "depth": 2,
+    "jump_to": [
+        {
+            "component_id": "Comp One",
+            "jump_count": 111,
+            "total_jumps": 100,
+            "depth": 1,
+            "jump_to": [
+                {
+                    "component_id": "Comp Two",
+                    "jump_count": 50,
+                    "total_jumps": -1,
+                    "depth": 0
+                },
+                {
+                    "component_id": "Comp Three",
+                    "jump_count": 50,
+                    "total_jumps": -1,
+                    "depth": 0
+                }
+            ]
+        },
+        {
+            "component_id": "Comp Two",
+            "jump_count": 222,
+            "total_jumps": -1,
+            "depth": 0
+        },
+        {
+            "component_id": "Comp Three",
+            "jump_count": 333,
+            "total_jumps": -1,
+            "depth": 0
+        }
+    ]
+}
+```
+
+Gets component pass info for a component in a page. Unspecified component_id returns tally results for the entire page instead.
+
+### HTTP Request
+`GET http://api.pinkpineapple.me/component_pass/:website_id/:page_id/:component_id?`
+
+### Url Parameters
+Parameter | Description
+--------- | -----------
+website_id | Domain of a website
+page_id | Url of a page
+component_id | *OPTIONAL* Component id
+
+### Query Parameters
+Parameter | Default | Description
+--------- | ------- | -----------
+depth | 1 | Depth of component pass
