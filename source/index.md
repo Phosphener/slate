@@ -1091,19 +1091,19 @@ start_time| Epoch Time | *OPTIONAL* Start date range
 end_time  | Current Time | *OPTIONAL* End date range
 period | Day | *OPTIONAL* Time period. Hour, Day, Week, Month
 
-# component_pass
+# component_path
 
-## GET /component_pass
+## GET /component_path
 ```shell
 curl -X GET -u USERNAME:PASSWORD \
-    http://api.pinkpineapple.me/component_pass/www.example.com/www.example.com%2Fpage/CompOne
+    http://api.pinkpineapple.me/component_path/www.example.com/www.example.com%2Fpage/CompOne
 ```
 
 ```javascript
 N/A
 ```
 
-> Sucessful request of component pass returns JSON of:
+> Sucessful request of component path returns JSON of:
 
 ```json
 {
@@ -1151,7 +1151,7 @@ N/A
 Gets component pass info for a component in a page. Unspecified component_id returns tally results for the entire page instead.
 
 ### HTTP Request
-`GET http://api.pinkpineapple.me/component_pass/:website_id/:page_id/:component_id?`
+`GET http://api.pinkpineapple.me/component_path/:website_id/:page_id/:component_id?`
 
 ### Url Parameters
 Parameter | Description
