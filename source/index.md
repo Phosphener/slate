@@ -1122,13 +1122,15 @@ N/A
                     "component_id": "Comp Two",
                     "jump_count": 50,
                     "total_jumps": -1,
-                    "depth": 0
+                    "depth": 0,
+                    "jump_to": []
                 },
                 {
                     "component_id": "Comp Three",
                     "jump_count": 50,
                     "total_jumps": -1,
-                    "depth": 0
+                    "depth": 0,
+                    "jump_to": []
                 }
             ]
         },
