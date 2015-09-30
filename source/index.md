@@ -608,7 +608,7 @@ site_id   | *OPTIONAL* Domain of a site.
 
 ```shell
 curl -X GET -u USERNAME:PASSWORD\ 
-    http://api.pinkpineapple.me/participant/component_fixation/www.example.com?participant_key=123456
+    http://api.pinkpineapple.me/participant/component_fixation/www.example.com?participant_id=123456
 ```
 
 ```javascript
@@ -1128,3 +1128,5 @@ component_id | *OPTIONAL* Component id
 Parameter | Default | Description
 --------- | ------- | -----------
 depth | 1 | Depth of component pass
+start_time| Epoch Time | *OPTIONAL* Start date range
+end_time  | Current Time | *OPTIONAL* End date range
