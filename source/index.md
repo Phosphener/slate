@@ -83,7 +83,9 @@ curl -H "Content-Type: application/json" -X POST \
     -d '{
             "username": "NEW_USERNAME",
             "email": "USER@NEW_EMAIL.COM",
-            "password": "NEW_PASSWORD"
+            "password": "NEW_PASSWORD",
+            "phone": "01234567898765",
+            "address": "100 Bourke Street, 1000 Melbourne"
         }'\ 
     http://api.pinkpineapple.me/register
 ```
@@ -120,6 +122,8 @@ Parameter | Description
 username | Username of account.
 email | Email to be registered.
 password | Password of account
+phone | *OPTIONAL* Phone Number
+address | *OPTIONAL* Address
 
 # key
 
@@ -252,50 +256,6 @@ data | BASE64 Compressed String (Secret Structure) (I'm just lazy to write it do
 <aside class="warning">
 An invalid `data` string will throw an error!
 </aside>
-
-## GET /data
-
-```shell
-curl -X GET -u USERNAME:PASSWORD\ 
-    http://api.pinkpineapple.me/data/x3DeknkJpoe2maj93
-```
-
-```javascript
-N/A
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-    "id": "ed30ls92nkjs093",
-    "timestamp": "2015-07-26T00:26:57.999Z",
-    "gazeObj": {
-        "x": 123.45,
-        "y": 234.56
-    },
-    "browser_screen": {
-        "width": 1920, 
-        "height": 1080
-    },
-    "domain": "www.example.com",
-    "url": "www.example.com/page",
-    "component": "Component One",
-    "session_key": "800a827b-679c-42be-85c0-b87a8744faed"
-}
-```
-
-This endpoint retrieves a specific eye gaze data object.
-Not for use. Only testing purposes.
-
-### HTTP Request
-
-`GET http://api.pinkpineapple.me/data/:id?`
-
-### URL Parameters
-Parameter | Description
---------- | -----------
-id | *OPTIONAL* Document id of data in database. Testing purposes only.
 
 # clicks
 
@@ -664,12 +624,14 @@ N/A
            "participant_key1":
                {
                    "page1": {
-                       "Component1": 20,
-                       "Component2": 30
-                   },
-                   "page2": {
-                       "Component3": 10,
-                       "Component4": 23
+                       "Component1": {
+                            "count": 20,
+                            "classes": ["Class1"]
+                        },
+                       "Component2": {
+                            "count": 30,
+                            "classes": ["Class2", "Class3"]
+                        }
                    }
                }
        }
@@ -712,8 +674,8 @@ N/A
 {
     "participants":
         {
-            "Sunday": {"12am": 65, "3am": 34, "11pm": 19 },
-            "Saturday": {"12am": 65, "3am": 34, "11pm": 19 }
+            "Sunday": {"0": 65, "3": 34, "23": 19 },
+            "Saturday": {"0": 65, "3": 34, "23": 19 }
         }
 }
 ```
